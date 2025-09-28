@@ -5,7 +5,13 @@ scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile53`, function (sprite, l
     tiles.setTileAt(location, assets.tile`myTile37`)
     tiles.placeOnTile(sprite, location)
     sprite.setVelocity(0, 0)
-    sprite.vx = randint(85, 150)
+    sprite.vx = randint(90, 100)
+})
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile40`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile54`)
+    tiles.placeOnTile(sprite, location)
+    sprite.setVelocity(0, 0)
+    sprite.vy = randint(-100, -90)
 })
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (menu == 1) {
@@ -16,13 +22,18 @@ scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile48`, function (sprite, l
     tiles.setTileAt(location, assets.tile`myTile58`)
     tiles.placeOnTile(sprite, location)
     sprite.setVelocity(0, 0)
-    sprite.vy = randint(85, 150)
+    sprite.vy = randint(90, 100)
 })
 scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile63`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile55`)
     tiles.placeOnTile(sprite, location)
     sprite.setVelocity(0, 0)
-    sprite.vy = randint(85, 150)
+    sprite.vy = randint(90, 100)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile46`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile55`)
+    tiles.placeOnTile(sprite, location)
+    direction = 3
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (menu == 1) {
@@ -54,33 +65,33 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
         if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile3`)) {
             racer = 0
-            startRace()
+            raceSetup()
         }
         if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile4`)) {
             racer = 1
-            startRace()
+            raceSetup()
         }
         if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile5`)) {
             racer = 2
-            startRace()
+            raceSetup()
         }
         if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile6`)) {
             racer = 3
-            startRace()
+            raceSetup()
         }
         if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile7`)) {
             racer = 4
-            startRace()
+            raceSetup()
         }
         if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile8`)) {
             racer = 5
-            startRace()
+            raceSetup()
         }
     }
     if (menu == 0 && canMove == 1) {
         speed += 5
-        if (speed > 150) {
-            speed = 150
+        if (speed > 100) {
+            speed = 100
         }
     }
 })
@@ -89,13 +100,78 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
         playerCursor.x += -16
     }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile42`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile56`)
+    tiles.placeOnTile(sprite, location)
+    direction = 2
+})
 scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile65`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile56`)
     tiles.placeOnTile(sprite, location)
     sprite.setVelocity(0, 0)
-    sprite.vx = randint(-150, -85)
+    sprite.vx = randint(-100, -90)
 })
-function startRace () {
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile50`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile37`)
+    tiles.placeOnTile(sprite, location)
+    sprite.setVelocity(0, 0)
+    sprite.vy = randint(90, 100)
+})
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile47`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile37`)
+    tiles.placeOnTile(sprite, location)
+    sprite.setVelocity(0, 0)
+    sprite.vx = randint(-100, -90)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile49`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile59`)
+    tiles.placeOnTile(sprite, location)
+    direction = 4
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (menu == 1) {
+        playerCursor.x += 16
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile66`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile58`)
+    tiles.placeOnTile(sprite, location)
+    direction = 1
+})
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile51`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile61`)
+    tiles.placeOnTile(sprite, location)
+    sprite.setVelocity(0, 0)
+    sprite.vx = randint(90, 100)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile52`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile60`)
+    tiles.placeOnTile(sprite, location)
+    direction = 1
+})
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile68`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile60`)
+    tiles.placeOnTile(sprite, location)
+    sprite.setVelocity(0, 0)
+    sprite.vy = randint(-100, -90)
+})
+controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (menu == 1) {
+        playerCursor.y += 16
+    }
+})
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile67`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile59`)
+    tiles.placeOnTile(sprite, location)
+    sprite.setVelocity(0, 0)
+    sprite.vx = randint(90, 100)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile62`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile54`)
+    tiles.placeOnTile(sprite, location)
+    direction = 3
+})
+function raceSetup () {
     direction = 1
     menu = 0
     sprites.destroy(playerCursor)
@@ -213,12 +289,12 @@ function startRace () {
     ]
     playerRacer = sprites.create(characters.removeAt(racer), SpriteKind.Player)
     scene.cameraFollowSprite(playerRacer)
-    tiles.placeOnRandomTile(playerRacer, assets.tile`transparency16`)
+    tiles.placeOnRandomTile(playerRacer, assets.tile`myTile39`)
     startPosition = playerRacer.tilemapLocation().row
     startPosition += 1
     for (let index = 0; index < 3; index++) {
         enemyRacer = sprites.create(characters.shift(), SpriteKind.Enemy)
-        tiles.placeOnRandomTile(enemyRacer, assets.tile`transparency16`)
+        tiles.placeOnRandomTile(enemyRacer, assets.tile`myTile35`)
         tiles.placeOnTile(enemyRacer, tiles.getTileLocation(enemyRacer.tilemapLocation().column, startPosition))
         startPosition += 1
     }
@@ -292,85 +368,51 @@ function startRace () {
         . . . . . . . . . . . . . . . . 
         `)
     Announcer = sprites.create(characters._pickRandom(), SpriteKind.Food)
-    tiles.placeOnRandomTile(Announcer, assets.tile`transparency16`)
+    tiles.placeOnRandomTile(Announcer, assets.tile`myTile71`)
     game.showLongText("Attention Racers!", DialogLayout.Bottom)
     game.showLongText("The race is about to begin!", DialogLayout.Bottom)
-    game.showLongText("Do you need a refresher on the rules?", DialogLayout.Bottom)
-    story.showPlayerChoices("Yes", "Nope!")
-    canMove = 1
+    music.stopAllSounds()
+    music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.InBackground)
+    Announcer.sayText("In 3...")
+    timer.after(1000, function () {
+        music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.InBackground)
+        Announcer.sayText("2...")
+        timer.after(1000, function () {
+            music.play(music.tonePlayable(587, music.beat(BeatFraction.Half)), music.PlaybackMode.InBackground)
+            Announcer.sayText("1...")
+            timer.after(1000, function () {
+                music.play(music.tonePlayable(988, music.beat(BeatFraction.Half)), music.PlaybackMode.InBackground)
+                Announcer.sayText("Go!!")
+                raceStart()
+            })
+        })
+    })
 }
-scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile50`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile37`)
-    tiles.placeOnTile(sprite, location)
-    sprite.setVelocity(0, 0)
-    sprite.vy = randint(85, 150)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile49`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile59`)
-    tiles.placeOnTile(sprite, location)
-    direction = 4
-})
-controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (menu == 1) {
-        playerCursor.x += 16
+function raceStart () {
+    for (let value of sprites.allOfKind(SpriteKind.Enemy)) {
+        for (let index = 0; index < randint(85, 150); index++) {
+            value.vx += 1
+        }
     }
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile66`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile58`)
-    tiles.placeOnTile(sprite, location)
-    direction = 1
-})
-scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile51`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile61`)
+    canMove = 1
+    speed = 50
+}
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile45`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile57`)
     tiles.placeOnTile(sprite, location)
     sprite.setVelocity(0, 0)
-    sprite.vx = randint(85, 150)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile52`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile60`)
-    tiles.placeOnTile(sprite, location)
-    direction = 1
-})
-scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile68`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile60`)
-    tiles.placeOnTile(sprite, location)
-    sprite.setVelocity(0, 0)
-    sprite.vy = randint(-150, -85)
-})
-controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (menu == 1) {
-        playerCursor.y += 16
-    }
-})
-scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile67`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile59`)
-    tiles.placeOnTile(sprite, location)
-    sprite.setVelocity(0, 0)
-    sprite.vx = randint(85, 150)
-})
-scene.onOverlapTile(SpriteKind.Enemy, assets.tile`transparency16`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`transparency16`)
-    tiles.placeOnTile(sprite, location)
-    sprite.setVelocity(0, 0)
-    sprite.vx = randint(-150, -85)
-})
-scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile62`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`myTile54`)
-    tiles.placeOnTile(sprite, location)
-    direction = 3
+    sprite.vx = randint(-100, -90)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile64`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile57`)
     tiles.placeOnTile(sprite, location)
     direction = 4
 })
-scene.onOverlapTile(SpriteKind.Player, assets.tile`transparency16`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`transparency16`)
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile41`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`myTile37`)
     tiles.placeOnTile(sprite, location)
-    direction = 3
-})
-sprites.onCreated(SpriteKind.Player, function (sprite) {
-    speed = 50
+    sprite.setVelocity(0, 0)
+    sprite.vy = randint(-100, -90)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile69`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile61`)
@@ -382,11 +424,11 @@ let enemyRacer: Sprite = null
 let startPosition = 0
 let playerRacer: Sprite = null
 let characters: Image[] = []
-let direction = 0
 let speed = 0
 let racer = 0
 let map = 0
 let text: Sprite = null
+let direction = 0
 let playerCursor: Sprite = null
 let menu = 0
 let canMove = 0
@@ -683,7 +725,7 @@ forever(function () {
     }
 })
 game.onUpdateInterval(100, function () {
-    speed += -3
+    speed += -1
     if (speed < 0) {
         speed = 0
     }
