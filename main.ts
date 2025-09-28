@@ -13,6 +13,13 @@ scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile40`, function (sprite, l
     sprite.setVelocity(0, 0)
     sprite.vy = randint(-100, -90)
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile72`, function (sprite, location) {
+    sprites.destroy(sprite)
+    winOrder.push(sprite.image)
+    if (winOrder.length == 4) {
+        raceEnd()
+    }
+})
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     if (menu == 1) {
         playerCursor.y += -16
@@ -105,11 +112,25 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile42`, function (sprite, 
     tiles.placeOnTile(sprite, location)
     direction = 2
 })
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile70`, function (sprite, location) {
+    sprites.destroy(sprite)
+    winOrder.push(sprite.image)
+    if (winOrder.length == 4) {
+        raceEnd()
+    }
+})
 scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile65`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile56`)
     tiles.placeOnTile(sprite, location)
     sprite.setVelocity(0, 0)
     sprite.vx = randint(-100, -90)
+})
+scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile73`, function (sprite, location) {
+    sprites.destroy(sprite)
+    winOrder.push(sprite.image)
+    if (winOrder.length == 4) {
+        raceEnd()
+    }
 })
 scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile50`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile37`)
@@ -396,6 +417,11 @@ function raceStart () {
     }
     canMove = 1
     speed = 50
+    speedBar = statusbars.create(4, 50, StatusBarKind.Energy)
+    speedBar.positionDirection(CollisionDirection.Right)
+    speedBar.max = 100
+    speedBar.setColor(7, 2)
+    speedBar.setBarBorder(1, 15)
 }
 scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile45`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile57`)
@@ -403,6 +429,33 @@ scene.onOverlapTile(SpriteKind.Enemy, assets.tile`myTile45`, function (sprite, l
     sprite.setVelocity(0, 0)
     sprite.vx = randint(-100, -90)
 })
+function raceEnd () {
+    sprites.destroyAllSpritesOfKind(SpriteKind.StatusBar)
+    scene.centerCameraAt(0, 0)
+    tiles.setCurrentTilemap(tilemap`level9`)
+    pause(500)
+    tiles.setCurrentTilemap(tilemap`level7`)
+    if (true) {
+    	
+    } else if (false) {
+    	
+    } else if (false) {
+    	
+    } else if (false) {
+    	
+    }
+    winSprite = sprites.create(winOrder.shift(), SpriteKind.Food)
+    tiles.placeOnRandomTile(winSprite, assets.tile`myTile74`)
+    winSprite.y += -16
+    _2Sprite = sprites.create(winOrder.shift(), SpriteKind.Food)
+    tiles.placeOnRandomTile(_2Sprite, assets.tile`myTile76`)
+    _2Sprite.y += -16
+    _3Sprite = sprites.create(winOrder.shift(), SpriteKind.Food)
+    tiles.placeOnRandomTile(_3Sprite, assets.tile`myTile77`)
+    _3Sprite.y += -8
+    LoseSprite = sprites.create(winOrder.shift(), SpriteKind.Food)
+    tiles.placeOnRandomTile(LoseSprite, assets.tile`myTile81`)
+}
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile64`, function (sprite, location) {
     tiles.setTileAt(location, assets.tile`myTile57`)
     tiles.placeOnTile(sprite, location)
@@ -419,6 +472,11 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile69`, function (sprite, 
     tiles.placeOnTile(sprite, location)
     direction = 2
 })
+let LoseSprite: Sprite = null
+let _3Sprite: Sprite = null
+let _2Sprite: Sprite = null
+let winSprite: Sprite = null
+let speedBar: StatusBarSprite = null
 let Announcer: Sprite = null
 let enemyRacer: Sprite = null
 let startPosition = 0
@@ -432,6 +490,8 @@ let direction = 0
 let playerCursor: Sprite = null
 let menu = 0
 let canMove = 0
+let winOrder: Image[] = []
+winOrder = []
 canMove = 0
 menu = 0
 tiles.setCurrentTilemap(tilemap`level6`)
@@ -728,5 +788,10 @@ game.onUpdateInterval(100, function () {
     speed += -1
     if (speed < 0) {
         speed = 0
+    }
+})
+game.onUpdateInterval(100, function () {
+    if (canMove == 1) {
+        speedBar.value = speed
     }
 })
