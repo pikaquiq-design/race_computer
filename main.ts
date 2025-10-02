@@ -45,8 +45,26 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile46`, function (sprite, 
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (menu == 1) {
-        if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile19`)) {
-        	
+        if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile2`)) {
+            game.setDialogCursor(img`
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                . . . . . . . . . . . . . . . . 
+                `)
+            game.showLongText("When the race starts, press the A button as much as possible to go faster. The bar on the side shows how fast you are going.", DialogLayout.Bottom)
         }
         if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile1`)) {
             text = sprites.create(img`
@@ -71,8 +89,20 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             text.setPosition(80, 12)
             tiles.setCurrentTilemap(tilemap`level0`)
         }
-        if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile0`)) {
-            map = 1
+        if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile79`)) {
+            map = 2
+            text.setImage(img`
+                .99.999.9...999..99.999...9.9..9..9.9.999...999.9....9..9.9.999.999
+                9...9...9...9...9....9....9.9.9.9.9.9.9.9...9.9.9...9.9.9.9.9...9.9
+                .99.99..9...99..9....9.....9..9.9.9.9.999...999.9...999..9..99..999
+                ..9.9...9...9...9....9.....9..9.9.9.9.99....9...9...9.9..9..9...99.
+                999.999.999.999..99..9.....9...9...9..9.9...9...999.9.9..9..999.9.9
+                `)
+            text.setPosition(80, 12)
+            tiles.setCurrentTilemap(tilemap`level0`)
+        }
+        if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile80`)) {
+            map = 3
             text.setImage(img`
                 .99.999.9...999..99.999...9.9..9..9.9.999...999.9....9..9.9.999.999
                 9...9...9...9...9....9....9.9.9.9.9.9.9.9...9.9.9...9.9.9.9.9...9.9
@@ -216,6 +246,9 @@ function raceSetup () {
     }
     if (map == 2) {
         tiles.setCurrentTilemap(tilemap`level8`)
+    }
+    if (map == 3) {
+        tiles.setCurrentTilemap(tilemap`level10`)
     }
     characters = [
     img`
@@ -815,7 +848,7 @@ forever(function () {
     }
 })
 game.onUpdateInterval(100, function () {
-    speed += -1
+    speed += -2
     if (speed < 0) {
         speed = 0
     }
