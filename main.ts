@@ -113,6 +113,18 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             text.setPosition(80, 12)
             tiles.setCurrentTilemap(tilemap`level0`)
         }
+        if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile82`)) {
+            map = 4
+            text.setImage(img`
+                .99.999.9...999..99.999...9.9..9..9.9.999...999.9....9..9.9.999.999
+                9...9...9...9...9....9....9.9.9.9.9.9.9.9...9.9.9...9.9.9.9.9...9.9
+                .99.99..9...99..9....9.....9..9.9.9.9.999...999.9...999..9..99..999
+                ..9.9...9...9...9....9.....9..9.9.9.9.99....9...9...9.9..9..9...99.
+                999.999.999.999..99..9.....9...9...9..9.9...9...999.9.9..9..999.9.9
+                `)
+            text.setPosition(80, 12)
+            tiles.setCurrentTilemap(tilemap`level0`)
+        }
         if (tiles.tileAtLocationEquals(playerCursor.tilemapLocation(), assets.tile`myTile3`)) {
             racer = 0
             raceSetup()
@@ -249,6 +261,9 @@ function raceSetup () {
     }
     if (map == 3) {
         tiles.setCurrentTilemap(tilemap`level10`)
+    }
+    if (map == 4) {
+        tiles.setCurrentTilemap(tilemap`level11`)
     }
     characters = [
     img`
